@@ -20,6 +20,7 @@ function CardContent({ className = "", children, ...props }) {
 function Button({ variant = "default", className = "", children, ...props }) {
   const baseClass =
     "inline-flex items-center justify-center font-medium transition focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:pointer-events-none disabled:opacity-50";
+
   const variantClass =
     variant === "outline"
       ? "border border-slate-200 bg-white text-slate-900 shadow-sm hover:bg-slate-50"
