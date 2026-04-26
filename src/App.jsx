@@ -247,16 +247,19 @@ function SectionTitle({ eyebrow, title, text, dark = false }) {
 const studentProfiles = {
   "chen-kexin": {
     office: "华南理工大学五山校区焊接楼",
-    email: "",
+    email: "202410180199@mail.scut.edu.cn",
     intro: "陈可欣，2024年入学，博士研究生，现为华南理工大学机械与汽车工程学院光声智能成像实验室成员。",
     education: [
-      "2017—2021 江苏大学 机械工程学院 机械设计制造及其自动化 学士",
-      "2021—2024 北京工业大学 机械与能源工程学院 机械工程 硕士",
-      "2024—至今 华南理工大学 机械与汽车工程学院 机械工程 博士",
+      "2017—2024 江苏大学 机械工程学院 工学学士",
+      "2021—2024 北京工业大学 机械与能源工程学院 工学硕士",
+      "2024—至今 华南理工大学 机械与汽车工程学院 在读博士",
     ],
     experience: ["科研经历待补充。"],
-    research: ["研究方向待补充。"],
-    publications: ["代表性成果待补充。"],
+    research: ["光学成像与精密仪器研究"],
+    publications: [
+      "Jiangbo Chen, Kexin Chen, Bin Li, Jiyan Dai, Zhen Yuan, Xiaobin Hong, Scanner perturbations enabling pseudo-ground-truth learning for super-resolution of sparse-sampling photoacoustic microscopy, Optics & Laser Technology, doi: 10.1016/j.optlastec.2026.115272.",
+      "陈江波, 陈可欣, 洪晓斌. 基于光声共焦多深度聚合的光声显微成像装置及成像方法[P]. 已授权：CN 119290776 B, 授权时间：2025年10月31日.",
+    ],
   },
   "li-congsen": {
     office: "华南理工大学五山校区焊接楼",
