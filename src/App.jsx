@@ -485,11 +485,13 @@ function MemberDetailPage({ memberId, onBack }) {
 
           <Card className="rounded-3xl border-slate-200 shadow-sm">
             <CardContent className="p-7">
-              <SimpleIcon label={isAdvisor ? "Acad" : "Info"} className="bg-blue-50 text-blue-600 shadow-none" />
-              <h2 className="mt-5 text-xl font-bold">{isAdvisor ? "学术兼职" : "更多信息"}</h2>
+              <SimpleIcon label={isAdvisor ? "Acad" : "Pub"} className="bg-blue-50 text-blue-600 shadow-none" />
+              <h2 className="mt-5 text-xl font-bold">{isAdvisor ? "学术兼职" : "代表性成果"}</h2>
               <div className="mt-4 space-y-3">
-                {(isAdvisor ? academicRoles : [profile.email ? `联系邮箱：${profile.email}` : "邮箱信息待补充。", "可后续补充论文成果、获奖情况等信息。"] ).map((item) => (
-                  <p key={item} className="text-sm leading-6 text-slate-600">• {item}</p>
+                {(isAdvisor ? academicRoles : profile.publications).map((item, index) => (
+                  <p key={`${profile.id}-top-${index}`} className="text-sm leading-6 text-slate-600">
+                    {isAdvisor ? "• " : `[${index + 1}] `}{item}
+                  </p>
                 ))}
               </div>
             </CardContent>
@@ -500,15 +502,21 @@ function MemberDetailPage({ memberId, onBack }) {
       <section className="bg-slate-50 px-5 py-16 lg:px-8">
         <div className="mx-auto max-w-5xl rounded-[2rem] border border-slate-200 bg-white p-8 shadow-sm">
           <div className="mb-6 flex items-center gap-3">
-            <SimpleIcon label="Pub" className="bg-blue-50 text-blue-600 shadow-none" />
-            <h2 className="text-2xl font-bold">{isAdvisor ? "代表性论文" : "代表性成果"}</h2>
+            <SimpleIcon label={isAdvisor ? "Pub" : "Info"} className="bg-blue-50 text-blue-600 shadow-none" />
+            <h2 className="text-2xl font-bold">{isAdvisor ? "代表性论文" : "更多信息"}</h2>
           </div>
           <div className="space-y-4">
-            {profile.publications.map((pub, index) => (
-              <div key={`${profile.id}-${index}`} className="rounded-2xl bg-slate-50 p-5 text-sm leading-7 text-slate-700">
-                <span className="mr-3 font-bold text-blue-600">[{index + 1}]</span>{pub}
-              </div>
-            ))}
+            {isAdvisor
+              ? profile.publications.map((pub, index) => (
+                  <div key={`${profile.id}-${index}`} className="rounded-2xl bg-slate-50 p-5 text-sm leading-7 text-slate-700">
+                    <span className="mr-3 font-bold text-blue-600">[{index + 1}]</span>{pub}
+                  </div>
+                ))
+              : [profile.email ? `联系邮箱：${profile.email}` : "邮箱信息待补充。", "可后续补充获奖情况等信息。"].map((item, index) => (
+                  <div key={`${profile.id}-info-${index}`} className="rounded-2xl bg-slate-50 p-5 text-sm leading-7 text-slate-700">
+                    • {item}
+                  </div>
+                ))}
           </div>
         </div>
       </section>
