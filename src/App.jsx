@@ -1,7 +1,36 @@
 import React, { useMemo, useState } from "react";
 import { motion } from "framer-motion";
-import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+
+function Card({ className = "", children, ...props }) {
+  return (
+    <div className={className} {...props}>
+      {children}
+    </div>
+  );
+}
+
+function CardContent({ className = "", children, ...props }) {
+  return (
+    <div className={className} {...props}>
+      {children}
+    </div>
+  );
+}
+
+function Button({ variant = "default", className = "", children, ...props }) {
+  const baseClass =
+    "inline-flex items-center justify-center font-medium transition focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:pointer-events-none disabled:opacity-50";
+  const variantClass =
+    variant === "outline"
+      ? "border border-slate-200 bg-white text-slate-900 shadow-sm hover:bg-slate-50"
+      : "bg-blue-600 text-white shadow-sm hover:bg-blue-700";
+
+  return (
+    <button className={`${baseClass} ${variantClass} ${className}`} {...props}>
+      {children}
+    </button>
+  );
+}
 
 const navItems = [
   { id: "home", label: "首页" },
