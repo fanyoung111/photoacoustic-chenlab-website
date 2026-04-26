@@ -258,6 +258,21 @@ const studentProfiles = {
     research: ["研究方向待补充。"],
     publications: ["代表性成果待补充。"],
   },
+  "li-congsen": {
+    office: "华南理工大学五山校区焊接楼",
+    email: "202410180250@mail.scut.edu.cn",
+    intro: "李枞森，2024年入学，博士研究生，现为华南理工大学机械与汽车工程学院光声智能成像实验室成员。",
+    education: [
+      "2016—2024 汕头大学 医学院 临床医学学士、外科学硕士",
+      "2024—至今 华南理工大学 机械与汽车工程学院 机械工程 在读博士",
+    ],
+    experience: ["科研经历待补充。"],
+    research: ["生物医学工程", "医用光学成像与精密仪器研究"],
+    publications: [
+      "Congsen Li, Kexin Chen, HaiPing Cai, Xiaobin Hong, Jiangbo Chen, Inducing and monitoring photothrombotic stroke in anesthetic neuroprotection-free mice using functional photoacoustic microscopy, Neurophoton. 13(2), 025007 (2026), doi: 10.1117/1.NPh.13.2.025007.",
+      "陈江波, 李枞森, 洪晓斌. 一种快速线性共焦扫描光声显微成像系统及其成像方法[P]. 已授权：CN119470280B, 授权时间：2025年10月3日.",
+    ],
+  },
   "yang-fan": {
     office: "华南理工大学五山校区焊接楼",
     email: "frankyang5525@gmail.com",
@@ -292,6 +307,18 @@ const studentProfiles = {
     ],
     experience: ["科研经历待补充。"],
     research: ["光声计算断层成像重建", "深度学习图像算法"],
+    publications: ["代表性成果待补充。"],
+  },
+  "xu-bowei": {
+    office: "华南理工大学五山校区焊接楼",
+    email: "1923484987@qq.com",
+    intro: "徐博伟，2025年入学，硕士研究生，现为华南理工大学机械与汽车工程学院光声智能成像实验室成员。",
+    education: [
+      "2019—2023 武汉理工大学 机电工程学院 机械工程 学士",
+      "2025—至今 华南理工大学 机械与汽车工程学院 机械工程 硕士",
+    ],
+    experience: ["科研经历待补充。"],
+    research: ["光声图像重建"],
     publications: ["代表性成果待补充。"],
   },
   "cai-zhongming": {
