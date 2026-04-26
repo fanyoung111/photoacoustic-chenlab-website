@@ -20,12 +20,10 @@ function CardContent({ className = "", children, ...props }) {
 function Button({ variant = "default", className = "", children, ...props }) {
   const baseClass =
     "inline-flex items-center justify-center font-medium transition focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:pointer-events-none disabled:opacity-50";
-
   const variantClass =
     variant === "outline"
       ? "border border-slate-200 bg-white text-slate-900 shadow-sm hover:bg-slate-50"
       : "bg-blue-600 text-white shadow-sm hover:bg-blue-700";
-
   return (
     <button className={`${baseClass} ${variantClass} ${className}`} {...props}>
       {children}
@@ -44,9 +42,9 @@ const navItems = [
 
 const researchItems = [
   {
-    icon: "PA",
-    title: "光声成像（PA）",
-    text: "围绕光声显微成像、快速扫描成像和系统集成开展研究，发展高分辨率、高灵敏度的光声成像技术与实验平台。",
+    icon: "PAM",
+    title: "光声显微成像（PAM）",
+    text: "围绕光声显微成像、快速扫描成像和系统集成开展研究，发展高分辨率、高灵敏度的光声显微成像技术与实验平台。",
   },
   {
     icon: "PACT",
@@ -109,7 +107,7 @@ const advisorProfile = {
   office: "华南理工大学五山校区10号楼325",
   email: "cjiangbo@scut.edu.cn",
   intro:
-    "陈江波老师于2021年10月博士毕业于香港城市大学，2021年10月至2023年03月在香港理工大学和香港城市大学从事研究工作，现任职于华南理工大学机械与汽车工程学院。主要研究方向包括光声成像技术及设备、深度学习图像处理理论与方法、人工智能感知技术等。",
+    "陈江波老师于2021年10月博士毕业于香港城市大学，2021年10月至2023年03月在香港理工大学和香港城市大学从事研究工作，现任职于华南理工大学机械与汽车工程学院。主要研究方向包括光声显微成像技术及设备、深度学习图像处理理论与方法、人工智能感知技术等。",
   education: [
     "2018.10–2021.10 香港城市大学 机械与生物医学工程 哲学博士",
     "2013.09–2016.01 哈尔滨工业大学 机械电子工程 学术硕士",
@@ -589,13 +587,13 @@ export default function LabWebsite() {
         <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-5 py-24 lg:grid-cols-[1.1fr_0.9fr] lg:px-8 lg:py-32">
           <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
             <p className="mb-5 inline-flex rounded-full border border-blue-200 bg-white/70 px-4 py-2 text-sm font-medium text-blue-700 shadow-sm">
-              光声成像 · 光声断层成像 · 深度学习图像重建 · 智能无损检测
+              光声显微成像 · 光声断层成像 · 深度学习图像重建 · 智能无损检测
             </p>
             <h1 className="text-4xl font-bold leading-tight tracking-tight text-slate-950 md:text-6xl">
               光声智能成像实验室
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-600">
-              华南理工大学机械与汽车工程学院光声智能成像实验室，围绕光声成像、光声断层成像、深度学习图像重建以及智能无损检测等方向开展研究，致力于发展高分辨率、高灵敏度和智能化的新型光声成像与检测技术。
+              华南理工大学机械与汽车工程学院光声智能成像实验室，围绕光声显微成像、光声断层成像、深度学习图像重建以及智能无损检测等方向开展研究，致力于发展高分辨率、高灵敏度和智能化的新型光声成像与检测技术。
             </p>
             <div className="mt-8 flex flex-wrap gap-4">
               <Button onClick={() => scrollTo("recruitment")} className="rounded-2xl bg-blue-600 px-6 py-6 text-base hover:bg-blue-700">
@@ -609,27 +607,25 @@ export default function LabWebsite() {
 
           <motion.div initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.7, delay: 0.1 }}>
             <div className="rounded-[2rem] border border-white/80 bg-white/70 p-4 shadow-2xl shadow-blue-100 backdrop-blur">
-              <div className="aspect-[4/3] rounded-[1.5rem] bg-gradient-to-br from-blue-600 to-cyan-400 p-8 text-white">
-                <div className="flex h-full flex-col gap-4">
-                  <div>
-                    <p className="text-sm font-medium text-blue-50">Main Research Directions</p>
-                    <h2 className="mt-2 text-2xl font-bold">主要研究方向</h2>
-                  </div>
-                  <div className="grid flex-1 gap-4">
-                    {[
-                      { icon: "PA", title: "光声成像", desc: "Photoacoustic Imaging" },
-                      { icon: "PACT", title: "光声断层成像", desc: "Photoacoustic Computed Tomography" },
-                      { icon: "DL", title: "深度学习图像重建", desc: "Deep Learning Reconstruction" },
-                    ].map((item) => (
-                      <div key={item.title} className="flex items-center gap-4 rounded-3xl bg-white/15 p-5 backdrop-blur">
-                        <SimpleIcon label={item.icon} className="h-12 w-12 shrink-0 bg-white/20 text-white shadow-none" />
-                        <div>
-                          <p className="text-xl font-bold">{item.title}</p>
-                          <p className="mt-1 text-sm text-blue-50">{item.desc}</p>
-                        </div>
+              <div className="rounded-[1.5rem] bg-gradient-to-br from-blue-600 via-sky-500 to-cyan-400 p-8 text-white">
+                <div className="mb-6">
+                  <p className="text-sm font-semibold tracking-wide text-white/85">Main Research Directions</p>
+                  <h2 className="mt-2 text-3xl font-bold md:text-4xl">主要研究方向</h2>
+                </div>
+                <div className="space-y-4">
+                  {[
+                    { icon: "PAM", title: "光声显微成像", desc: "Photoacoustic Microscopy" },
+                    { icon: "PACT", title: "光声断层成像", desc: "Photoacoustic Computed Tomography" },
+                    { icon: "DL", title: "深度学习图像重建", desc: "Deep Learning-based Image Reconstruction" },
+                  ].map((item) => (
+                    <div key={item.title} className="flex items-center gap-4 rounded-[1.75rem] bg-white/15 p-5 backdrop-blur-sm">
+                      <SimpleIcon label={item.icon} className="h-14 w-14 shrink-0 bg-white/20 text-white shadow-none" />
+                      <div className="min-w-0">
+                        <p className="text-xl font-bold leading-tight md:text-2xl">{item.title}</p>
+                        <p className="mt-1 break-words text-sm leading-6 text-white/85">{item.desc}</p>
                       </div>
-                    ))}
-                  </div>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
@@ -638,7 +634,7 @@ export default function LabWebsite() {
       </section>
 
       <section id="research" className="px-5 py-20 lg:px-8">
-        <SectionTitle eyebrow="Research" title="研究方向" text="围绕光声成像、光声断层成像、深度学习图像重建与智能无损检测开展多学科交叉研究。" />
+        <SectionTitle eyebrow="Research" title="研究方向" text="围绕光声显微成像、光声断层成像、深度学习图像重建与智能无损检测开展多学科交叉研究。" />
         <div className="mx-auto grid max-w-7xl gap-6 md:grid-cols-2 lg:grid-cols-4">
           {researchItems.map((item) => (
             <Card key={item.title} className="rounded-3xl border-slate-200 shadow-sm transition hover:-translate-y-1 hover:shadow-xl">
@@ -752,7 +748,7 @@ export default function LabWebsite() {
       </section>
 
       <section id="recruitment" className="px-5 py-20 lg:px-8">
-        <SectionTitle eyebrow="Join Us" title="招生信息" text="欢迎对光声成像、光声断层成像、深度学习图像重建、智能无损检测和生物医学工程感兴趣的同学加入。" />
+        <SectionTitle eyebrow="Join Us" title="招生信息" text="欢迎对光声显微成像、光声断层成像、深度学习图像重建、智能无损检测和生物医学工程感兴趣的同学加入。" />
         <div className="mx-auto grid max-w-6xl gap-6 md:grid-cols-3">
           {[
             { icon: "MSc", title: "招生对象", text: "欢迎硕士研究生、博士研究生、本科科研训练学生加入课题组。" },
