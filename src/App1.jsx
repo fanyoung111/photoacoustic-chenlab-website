@@ -1,13 +1,42 @@
 import React, { useMemo, useState } from "react";
 import { motion } from "framer-motion";
-import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+
+function Card({ className = "", children, ...props }) {
+  return (
+    <div className={className} {...props}>
+      {children}
+    </div>
+  );
+}
+
+function CardContent({ className = "", children, ...props }) {
+  return (
+    <div className={className} {...props}>
+      {children}
+    </div>
+  );
+}
+
+function Button({ variant = "default", className = "", children, ...props }) {
+  const baseClass =
+    "inline-flex items-center justify-center font-medium transition focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:pointer-events-none disabled:opacity-50";
+  const variantClass =
+    variant === "outline"
+      ? "border border-slate-200 bg-white text-slate-900 shadow-sm hover:bg-slate-50"
+      : "bg-blue-600 text-white shadow-sm hover:bg-blue-700";
+  return (
+    <button className={`${baseClass} ${variantClass} ${className}`} {...props}>
+      {children}
+    </button>
+  );
+}
 
 const navItems = [
   { id: "home", label: "首页" },
   { id: "research", label: "研究方向" },
   { id: "team", label: "团队成员" },
   { id: "publications", label: "成果展示" },
+  { id: "news", label: "新闻动态" },
   { id: "recruitment", label: "招生信息" },
   { id: "contact", label: "联系我们" },
 ];
@@ -20,8 +49,8 @@ const researchItems = [
   },
   {
     icon: "PACT",
-    title: "光声断层成像（PACT）",
-    text: "研究光声断层成像系统、声学探测结构和图像重建方法，面向组织结构与功能信息的三维可视化检测。",
+    title: "光声层析成像（PACT）",
+    text: "研究光声层析成像系统、声学探测结构和图像重建方法，面向组织结构与功能信息的三维可视化检测。",
   },
   {
     icon: "DL",
@@ -41,7 +70,6 @@ const members = [
   { id: "li-congsen", role: "博士研究生", name: "李枞森", enrollYear: "2024年入学", enrollOrder: 2024, desc: "博士研究生。" },
   { id: "li-tianyou", role: "博士研究生", name: "李天佑", enrollYear: "2025年入学", enrollOrder: 2025, desc: "博士研究生。" },
   { id: "shen-zhiye", role: "博士研究生", name: "沈志烨", enrollYear: "2026年入学", enrollOrder: 2026, desc: "博士研究生。" },
-  { id: "ma-zeyu", role: "硕士研究生", name: "马泽禹", enrollYear: "2023年入学", enrollOrder: 2023, desc: "硕士研究生。" },
   { id: "lei-ying", role: "硕士研究生", name: "雷瑛", enrollYear: "2024年入学", enrollOrder: 2024, desc: "硕士研究生。" },
   { id: "yang-fan", role: "硕士研究生", name: "杨帆", enrollYear: "2024年入学", enrollOrder: 2024, desc: "硕士研究生。" },
   { id: "xu-bowei", role: "硕士研究生", name: "徐博伟", enrollYear: "2025年入学", enrollOrder: 2025, desc: "硕士研究生。" },
@@ -71,13 +99,19 @@ const publications = [
   "Yachao Zhang#, Jiangbo Chen#, Jie Zhang, Jingyi Zhu, Chao Liu, Hongyan Sun, Lidai Wang*. Super-resolution functional and molecular photoacoustic microscopy. Advanced Science, 2023, 10: 2302486.",
 ];
 
+const news = [
+  { date: "2026-04", title: "课题组网站初版上线，欢迎关注光声智能成像方向。" },
+  { date: "2025", title: "陈江波老师获评华南理工大学机械与汽车工程学院优秀班主任。" },
+  { date: "2024", title: "课题组在 Photoacoustics 发表深度学习辅助快速扫描光声显微成像相关研究成果。" },
+];
+
 const advisorProfile = {
   id: "chen-jiangbo",
   name: "陈江波",
   title: "副教授 / 博士生导师 / 硕士生导师",
   affiliation: "华南理工大学机械与汽车工程学院",
-  office: "华南理工大学五山校区10号楼325",
-  email: "cjiangbo@scut.edu.cn",
+  office: "华南理工大学10号楼",
+  email: "邮箱信息待确认后补充",
   intro:
     "陈江波老师于2021年10月博士毕业于香港城市大学，2021年10月至2023年03月在香港理工大学和香港城市大学从事研究工作，现任职于华南理工大学机械与汽车工程学院。主要研究方向包括光声成像技术及设备、深度学习图像处理理论与方法、人工智能感知技术等。",
   education: [
@@ -126,59 +160,6 @@ function cx(...classes) {
 }
 
 function SimpleIcon({ label, className = "" }) {
-  const iconClass = "h-6 w-6";
-
-  const iconMap = {
-    Office: (
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        className={iconClass}
-      >
-        <path d="M3 21h18" />
-        <path d="M5 21V7l7-4 7 4v14" />
-        <path d="M9 21v-4h6v4" />
-        <path d="M9 10h.01" />
-        <path d="M15 10h.01" />
-        <path d="M9 13h.01" />
-        <path d="M15 13h.01" />
-      </svg>
-    ),
-    Lab: (
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        className={iconClass}
-      >
-        <path d="M10 2v6l-5.5 9.5A2 2 0 0 0 6.2 21h11.6a2 2 0 0 0 1.7-3L14 8V2" />
-        <path d="M8 2h8" />
-        <path d="M7 14h10" />
-      </svg>
-    ),
-    Mail: (
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        className={iconClass}
-      >
-        <rect x="3" y="5" width="18" height="14" rx="2" />
-        <path d="M3 7l9 6 9-6" />
-      </svg>
-    ),
-  };
-
   return (
     <span
       className={cx(
@@ -187,7 +168,7 @@ function SimpleIcon({ label, className = "" }) {
       )}
       aria-hidden="true"
     >
-      {iconMap[label] ?? label}
+      {label}
     </span>
   );
 }
@@ -230,66 +211,6 @@ const studentProfiles = {
     research: ["研究方向待补充。"],
     publications: ["代表性成果待补充。"],
   },
-  "yang-fan": {
-    office: "华南理工大学五山校区焊接楼",
-    email: "frankyang5525@gmail.com",
-    intro: "杨帆，2024年入学，硕士研究生，现为华南理工大学机械与汽车工程学院光声智能成像实验室成员。",
-    education: [
-      "2020—2024 南京林业大学 机械电子工程学院 机械电子工程 学士",
-      "2024—至今 华南理工大学 机械与汽车工程学院 机械工程 硕士",
-    ],
-    experience: ["科研经历待补充。"],
-    research: ["光声显微成像系统", "超声换能器"],
-    publications: ["代表性成果待补充。"],
-  },
-  "ma-zeyu": {
-    office: "华南理工大学五山校区焊接楼",
-    email: "969447949@qq.com",
-    intro: "马泽禹，2023年入学，硕士研究生，现为华南理工大学光声智能成像实验室成员。",
-    education: [
-      "2018—2022 华南理工大学 材料科学与工程学院 学士",
-      "2023—至今 华南理工大学 物理与光电学院 硕士",
-    ],
-    experience: ["科研经历待补充。"],
-    research: ["PACT图像重建及后处理"],
-    publications: ["代表性成果待补充。"],
-  },
-  "lei-ying": {
-    office: "华南理工大学五山校区焊接楼",
-    email: "menleiying@mail.scut.edu.cn",
-    intro: "雷瑛，2024年入学，硕士研究生，现为华南理工大学机械与汽车工程学院光声智能成像实验室成员。",
-    education: [
-      "2020—2024 南京理工大学 机械工程学院 机械设计及其自动化 学士",
-      "2024—至今 华南理工大学 机械与汽车工程学院 机械工程 硕士",
-    ],
-    experience: ["科研经历待补充。"],
-    research: ["光声计算断层成像重建", "深度学习图像算法"],
-    publications: ["代表性成果待补充。"],
-  },
-  "cai-zhongming": {
-    office: "华南理工大学五山校区焊接楼",
-    email: "18694953578@163.com",
-    intro: "蔡仲明，2025年入学，硕士研究生，现为华南理工大学机械与汽车工程学院光声智能成像实验室成员。",
-    education: [
-      "2021—2025 河海大学 机电工程学院 机械工程 学士",
-      "2024—至今 华南理工大学 机械与汽车工程学院 机械工程 硕士",
-    ],
-    experience: ["科研经历待补充。"],
-    research: ["深度学习图像算法", "光声显微镜图像重建"],
-    publications: ["代表性成果待补充。"],
-  },
-  "lu-qiaowen": {
-    office: "华南理工大学五山校区焊接楼",
-    email: "854013595@qq.com",
-    intro: "卢巧雯，2025年入学，硕士研究生，现为华南理工大学机械与汽车工程学院光声智能成像实验室成员。",
-    education: [
-      "2021—2025 华北电力大学 机械工程系 机械工程专业 学士",
-      "2025—至今 华南理工大学 机械与汽车工程学院 机械工程 硕士",
-    ],
-    experience: ["科研经历待补充。"],
-    research: ["光声成像系统硬件设计", "成像装置性能优化"],
-    publications: ["代表性成果待补充。"],
-  },
 };
 
 function makeStudentProfile(member) {
@@ -324,7 +245,7 @@ function assertSiteData() {
   if (!researchItems.every((item) => item.title && item.text && item.icon)) return false;
   if (!members.every((member) => member.id && member.role && member.name && member.desc)) return false;
   if (!members.every((member) => getMemberProfile(member.id).name === member.name)) return false;
-  if (publications.length === 0) return false;
+  if (publications.length === 0 || news.length === 0) return false;
   return true;
 }
 
@@ -433,7 +354,7 @@ function MemberDetailPage({ memberId, onBack }) {
               <SimpleIcon label={isAdvisor ? "Acad" : "Info"} className="bg-blue-50 text-blue-600 shadow-none" />
               <h2 className="mt-5 text-xl font-bold">{isAdvisor ? "学术兼职" : "更多信息"}</h2>
               <div className="mt-4 space-y-3">
-                {(isAdvisor ? academicRoles : [profile.email ? `联系邮箱：${profile.email}` : "邮箱信息待补充。", "可后续补充论文成果、获奖情况等信息。"] ).map((item) => (
+                {(isAdvisor ? academicRoles : ["个人主页内容待补充。", "可后续补充研究方向、邮箱、论文成果、获奖情况等信息."] ).map((item) => (
                   <p key={item} className="text-sm leading-6 text-slate-600">• {item}</p>
                 ))}
               </div>
@@ -559,13 +480,13 @@ export default function LabWebsite() {
         <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-5 py-24 lg:grid-cols-[1.1fr_0.9fr] lg:px-8 lg:py-32">
           <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
             <p className="mb-5 inline-flex rounded-full border border-blue-200 bg-white/70 px-4 py-2 text-sm font-medium text-blue-700 shadow-sm">
-              光声成像 · 光声断层成像 · 深度学习图像重建 · 智能无损检测
+              光声成像 · 光声层析成像 · 深度学习图像重建 · 智能无损检测
             </p>
             <h1 className="text-4xl font-bold leading-tight tracking-tight text-slate-950 md:text-6xl">
               光声智能成像实验室
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-600">
-              华南理工大学机械与汽车工程学院光声智能成像实验室，围绕光声成像、光声断层成像、深度学习图像重建以及智能无损检测等方向开展研究，致力于发展高分辨率、高灵敏度和智能化的新型光声成像与检测技术。
+              华南理工大学机械与汽车工程学院光声智能成像实验室，围绕光声成像、光声层析成像、深度学习图像重建以及智能无损检测等方向开展研究，致力于发展高分辨率、高灵敏度和智能化的新型光声成像与检测技术。
             </p>
             <div className="mt-8 flex flex-wrap gap-4">
               <Button onClick={() => scrollTo("recruitment")} className="rounded-2xl bg-blue-600 px-6 py-6 text-base hover:bg-blue-700">
@@ -588,7 +509,7 @@ export default function LabWebsite() {
                   <div className="grid flex-1 gap-4">
                     {[
                       { icon: "PA", title: "光声成像", desc: "Photoacoustic Imaging" },
-                      { icon: "PACT", title: "光声断层成像", desc: "Photoacoustic Computed Tomography" },
+                      { icon: "PACT", title: "光声层析成像", desc: "Photoacoustic Computed Tomography" },
                       { icon: "DL", title: "深度学习图像重建", desc: "Deep Learning Reconstruction" },
                     ].map((item) => (
                       <div key={item.title} className="flex items-center gap-4 rounded-3xl bg-white/15 p-5 backdrop-blur">
@@ -608,7 +529,7 @@ export default function LabWebsite() {
       </section>
 
       <section id="research" className="px-5 py-20 lg:px-8">
-        <SectionTitle eyebrow="Research" title="研究方向" text="围绕光声成像、光声断层成像、深度学习图像重建与智能无损检测开展多学科交叉研究。" />
+        <SectionTitle eyebrow="Research" title="研究方向" text="围绕光声成像、光声层析成像、深度学习图像重建与智能无损检测开展多学科交叉研究。" />
         <div className="mx-auto grid max-w-7xl gap-6 md:grid-cols-2 lg:grid-cols-4">
           {researchItems.map((item) => (
             <Card key={item.title} className="rounded-3xl border-slate-200 shadow-sm transition hover:-translate-y-1 hover:shadow-xl">
@@ -721,8 +642,23 @@ export default function LabWebsite() {
         </div>
       </section>
 
+      <section id="news" className="bg-slate-950 px-5 py-20 text-white lg:px-8">
+        <SectionTitle eyebrow="News" title="新闻动态" text="记录课题组科研进展、学术交流和学生培养动态。" dark />
+        <div className="mx-auto max-w-5xl space-y-4">
+          {news.map((item) => (
+            <div key={item.title} className="flex flex-col gap-3 rounded-3xl border border-white/10 bg-white/5 p-6 md:flex-row md:items-center md:justify-between">
+              <div className="flex items-center gap-4">
+                <SimpleIcon label="News" className="bg-blue-500/20 text-blue-100 shadow-none" />
+                <p className="font-medium text-slate-100">{item.title}</p>
+              </div>
+              <p className="text-sm text-blue-200">{item.date}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
       <section id="recruitment" className="px-5 py-20 lg:px-8">
-        <SectionTitle eyebrow="Join Us" title="招生信息" text="欢迎对光声成像、光声断层成像、深度学习图像重建、智能无损检测和生物医学工程感兴趣的同学加入。" />
+        <SectionTitle eyebrow="Join Us" title="招生信息" text="欢迎对光声成像、光声层析成像、深度学习图像重建、智能无损检测和生物医学工程感兴趣的同学加入。" />
         <div className="mx-auto grid max-w-6xl gap-6 md:grid-cols-3">
           {[
             { icon: "MSc", title: "招生对象", text: "欢迎硕士研究生、博士研究生、本科科研训练学生加入课题组。" },
@@ -742,25 +678,14 @@ export default function LabWebsite() {
 
       <section id="contact" className="bg-blue-50 px-5 py-20 lg:px-8">
         <SectionTitle eyebrow="Contact" title="联系我们" text="欢迎学术交流、项目合作与学生咨询。" />
-        <div className="mx-auto grid max-w-5xl gap-6 md:grid-cols-3">
+        <div className="mx-auto grid max-w-5xl gap-6 md:grid-cols-2">
           <Card className="rounded-3xl border-none shadow-sm">
             <CardContent className="p-8">
               <div className="flex items-start gap-4">
-                <SimpleIcon label="Office" className="shrink-0 bg-white text-blue-600 shadow-none" />
-                <div>
-                  <h3 className="font-bold">导师办公室</h3>
-                  <p className="mt-2 text-sm leading-7 text-slate-600">华南理工大学五山校区10号楼325</p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-          <Card className="rounded-3xl border-none shadow-sm">
-            <CardContent className="p-8">
-              <div className="flex items-start gap-4">
-                <SimpleIcon label="Lab" className="shrink-0 bg-white text-blue-600 shadow-none" />
+                <SimpleIcon label="Map" className="shrink-0 bg-white text-blue-600 shadow-none" />
                 <div>
                   <h3 className="font-bold">实验室地址</h3>
-                  <p className="mt-2 text-sm leading-7 text-slate-600">华南理工大学五山校区焊接楼</p>
+                  <p className="mt-2 text-sm leading-7 text-slate-600">华南理工大学机械与汽车工程学院 光声智能成像实验室</p>
                 </div>
               </div>
             </CardContent>
@@ -771,7 +696,7 @@ export default function LabWebsite() {
                 <SimpleIcon label="Mail" className="shrink-0 bg-white text-blue-600 shadow-none" />
                 <div>
                   <h3 className="font-bold">联系邮箱</h3>
-                  <p className="mt-2 text-sm leading-7 text-slate-600">cjiangbo@scut.edu.cn</p>
+                  <p className="mt-2 text-sm leading-7 text-slate-600">邮箱信息待确认后补充</p>
                 </div>
               </div>
             </CardContent>
